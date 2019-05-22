@@ -1,0 +1,101 @@
+::-webkit-scrollbar {
+  width: 8px; }
+
+::-webkit-scrollbar-thumb {
+  width: 8px; }
+
+::-webkit-scrollbar-track {
+  background: #0D0e11; }
+
+::-webkit-scrollbar-thumb {
+  background: #894a90; }
+
+body {
+  margin: 0; }
+  body #pinContainer {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
+  body .panel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: left; }
+    body .panel.main, body .panel.turqoise, body .panel.green, body .panel.bordeaux {
+      background-color: #0D0e11; }
+  body .main-content {
+    position: relative; }
+  body footer {
+    position: absolute;
+    bottom: 5px;
+    font-family: "cookie";
+    color: #ffffff;
+    font-size: 19px !important;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1.5px; }
+    body footer span {
+      color: #894a90; }
+  body .flaticon-like:before {
+    margin: 0;
+    font-size: 11px; }
+  body .logo {
+    position: absolute;
+    top: 10%;
+    left: 5%; }
+    body .logo img {
+      height: 90px;
+      width: 115px; }
+  body .content {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-20%, -50%);
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500; }
+    body .content p {
+      font-size: 38px;
+      text-align: left; }
+    body .content span {
+      font-family: "Cookie", cursive; }
+  body .title-sect, body .title-sect-close {
+    color: #ffffff;
+    font-family: "Inconsolata", monospace;
+    font-size: 25px; }
+    body .title-sect::before, body .title-sect-close::before {
+      content: "<"; }
+    body .title-sect::after, body .title-sect-close::after {
+      content: ">"; }
+  body .title-sect-close::after {
+    content: "/>"; }
+  body .padding {
+    padding: 5%; }
+
+/*Media Queries */
+@media (max-width: 992px) {
+  h1 {
+    font-size: 30px; }
+
+  .options a {
+    font-size: 16px; }
+
+  .options {
+    margin-top: 3%; } }
+@media (max-width: 768px) and (orientation: landscape) {
+  .logo {
+    top: 10%; } }
+@media (max-width: 768px) {
+  .logo img {
+    width: 60%; } }
+@media (max-width: 575px) {
+  .logo img {
+    width: 80%; } }
+@media (max-width: 575px) and (orientation: landscape) {
+  .logo img {
+    width: 60%; }
+
+  .logo {
+    top: 7%; } }
+
+/*# sourceMappingURL=style.css.map */
