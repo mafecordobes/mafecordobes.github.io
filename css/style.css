@@ -10,19 +10,48 @@
 ::-webkit-scrollbar-thumb {
   background: #894a90; }
 
+#reveal1 {
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out; }
+
+#reveal1.visible {
+  opacity: 1;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none; }
+
 body {
   margin: 0; }
+  body canvas.particles-js-canvas-el {
+    height: 100vh !important; }
+  body section.panel.main {
+    height: 100vh; }
+  body section.demo {
+    text-align: center;
+    background: #0D0e11; }
   body #pinContainer {
     width: 100%;
     height: 100%;
     overflow: hidden; }
-  body .panel {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    text-align: left; }
-    body .panel.main, body .panel.turqoise, body .panel.green, body .panel.bordeaux {
-      background-color: #0D0e11; }
+  body .panel.main, body .panel.turqoise, body .panel.green, body .panel.bordeaux {
+    background-color: #0D0e11; }
+  body .panel.turqoise .title-sect, body .panel.turqoise .title-sect-close {
+    color: #b0ddd1; }
+  body .panel.green .title-sect, body .panel.green .title-sect-close {
+    color: #894a90; }
+  body .panel.bordeaux .title-sect, body .panel.bordeaux .title-sect-close {
+    color: #ffffff; }
   body .main-content {
     position: relative; }
   body footer {
@@ -62,7 +91,7 @@ body {
   body .title-sect, body .title-sect-close {
     color: #ffffff;
     font-family: "Inconsolata", monospace;
-    font-size: 25px; }
+    font-size: 30px; }
     body .title-sect::before, body .title-sect-close::before {
       content: "<"; }
     body .title-sect::after, body .title-sect-close::after {
@@ -71,7 +100,60 @@ body {
     content: "/>"; }
   body .padding {
     padding: 5%; }
+  body .content-about {
+    font-size: 18px;
+    width: 45%;
+    padding-left: 2%;
+    line-height: 1.4;
+    color: #777b87;
+    font-family: "Montserrat", sans-serif;
+    float: left; }
+    body .content-about .content-grey {
+      color: #777b87; }
+    body .content-about .content-green {
+      color: #b0ddd1; }
+    body .content-about .content-berry {
+      color: #894a90; }
+  body .content-image {
+    float: left;
+    width: 45%;
+    position: relative; }
+    body .content-image img {
+      max-width: 265px;
+      margin: 0 auto;
+      display: inherit; }
+  body .section-two {
+    display: inline-block; }
 
+.demo {
+  background: #0D0e11;
+  padding-top: 5em;
+  display: flex;
+  justify-content: center;
+  padding: 5%; }
+
+.typewriter h1 {
+  color: #777b87;
+  font-family: "Inconsolata", monospace;
+  font-size: 30px;
+  overflow: hidden;
+  border-right: 0.15em solid rgba(137, 74, 144, 0.5);
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.15em;
+  animation: typing 4s steps(30, end), blink-caret 0.5s step-end infinite;
+  animation-iteration-count: 3; }
+
+@keyframes typing {
+  from {
+    width: 0; }
+  to {
+    width: 100%; } }
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent; }
+  50% {
+    border-color: rgba(137, 74, 144, 0.5); } }
 /*Media Queries */
 @media (max-width: 992px) {
   h1 {
@@ -81,21 +163,55 @@ body {
     font-size: 16px; }
 
   .options {
-    margin-top: 3%; } }
+    margin-top: 3%; }
+
+  section.demo {
+    display: none; } }
 @media (max-width: 768px) and (orientation: landscape) {
   .logo {
-    top: 10%; } }
+    top: 10%; }
+
+  body .content-about, body .content-image {
+    width: 100%; } }
 @media (max-width: 768px) {
   .logo img {
-    width: 60%; } }
+    width: 60%; }
+
+  canvas.particles-js-canvas-el {
+    height: 100vh !important; }
+
+  body .content p {
+    font-size: 30px; }
+
+  section.demo {
+    display: none; }
+
+  body .content-about, body .content-image {
+    width: 100%; } }
 @media (max-width: 575px) {
   .logo img {
-    width: 80%; } }
+    width: 80%; }
+
+  section.demo {
+    display: none; }
+
+  body .content-about, body .content-image {
+    width: 100%; }
+    body .content-about img, body .content-image img {
+      max-width: 200px; } }
 @media (max-width: 575px) and (orientation: landscape) {
   .logo img {
     width: 60%; }
 
   .logo {
-    top: 7%; } }
+    top: 7%; }
+
+  section.demo {
+    display: none; }
+
+  body .content-about, body .content-image {
+    width: 100%; }
+    body .content-about img, body .content-image img {
+      max-width: 200px; } }
 
 /*# sourceMappingURL=style.css.map */

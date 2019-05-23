@@ -13,25 +13,40 @@
 	.options 
 		margin-top: 3%
 
+	section.demo
+		display: none
 
 
 
 @media (max-width: 768px) and (orientation: landscape)
 	.logo 
 		top: 10%
-
+	body .content-about, body .content-image
+		width: 100%
 
 
 @media (max-width: 768px) 
 	.logo img 
 		width: 60%
-
-
+	canvas.particles-js-canvas-el
+		height: 100vh !important
+	body .content p
+		font-size: 30px
+	section.demo
+		display: none
+	body .content-about, body .content-image
+		width: 100%
 
 
 @media (max-width: 575px) 
 	.logo img 
 		width: 80%
+	section.demo
+		display: none
+	body .content-about, body .content-image
+		width: 100%
+		img 
+			max-width: 200px
 
 
 
@@ -41,6 +56,14 @@
 
 	.logo 
 		top: 7%
+
+	section.demo
+		display: none
+
+	body .content-about, body .content-image
+		width: 100%
+		img 
+			max-width: 200px
 
 
 

@@ -1,20 +1,26 @@
-$(function () { // wait for document ready
-	// init
-	var controller = new ScrollMagic.Controller();
+function pathPrepare ($el) {
+	var lineLength = $el[0].getTotalLength();
+	$el.css("stroke-dasharray", lineLength);
+	$el.css("stroke-dashoffset", lineLength);
+}
 
-	// define movement of panels
-	var wipeAnimation = new TimelineMax()
-		.fromTo("section.panel.turqoise", 1, {x: "-100%"}, {x: "0%", ease: Linear.easeNone})  // in from left
-		.fromTo("section.panel.green",    1, {x:  "100%"}, {x: "0%", ease: Linear.easeNone})  // in from right
-		.fromTo("section.panel.bordeaux", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in from top
+var $word = $("path#word");
+var $dot = $("path#dot");
 
-	// create scene to pin and link animation
-	new ScrollMagic.Scene({
-			triggerElement: "#pinContainer",
-			triggerHook: "onLeave",
-			duration: "300%"
-		})
-		.setPin("#pinContainer")
-		.setTween(wipeAnimation)
-		.addTo(controller);
-});
+// prepare SVG
+pathPrepare($word);
+pathPrepare($dot);
+
+// init controller
+var controller = new ScrollMagic.Controller();
+
+// build tween
+var tween = new TimelineMax()
+	.add(TweenMax.to($word, 0.9, {strokeDashoffset: 0, ease:Linear.easeNone})) // draw word for 0.9
+	.add(TweenMax.to($dot, 0.1, {strokeDashoffset: 0, ease:Linear.easeNone}))  // draw dot for 0.1
+	.add(TweenMax.to("path", 1, {stroke: "#b0ddd1", ease:Linear.easeNone}), 0);			// change color during the whole thing
+
+// build scene
+var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 200, tweenChanges: true})
+				.setTween(tween)
+				.addTo(controller);
