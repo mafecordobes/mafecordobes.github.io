@@ -157,7 +157,8 @@ body {
 #chartdiv, #chartdivskill {
   width: 100%;
   height: 450px;
-  font-family: "Inconsolata", monospace; }
+  font-family: "Inconsolata", monospace;
+  margin-bottom: 5%; }
 
 /*Media Queries */
 @media (max-width: 992px) {

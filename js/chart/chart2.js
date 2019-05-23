@@ -5,255 +5,52 @@ am4core.ready(function() {
 	am4core.useTheme(am4themes_animated);
 	// Themes end
 	
-	var data = [{
-		"country": "Dummy",
-		"disabled": true,
-		"litres": 1000,
-		"color": am4core.color("#dadada"),
-		"opacity": 0.3,
-		"strokeDasharray": "4,4"
+	var iconPath = "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+	
+	
+	
+	var chart = am4core.create("chartdivskill", am4charts.SlicedChart);
+	chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+	
+	chart.data = [{
+		"name": "HTLM5",
+		"value": 500
 	}, {
-		"country": "HTML5",
-		"litres": 100
+		"name": "CSS3/SASS/SCSS/LESS",
+		"value": 450
 	}, {
-		"country": "CSS3",
-		"litres": 90
+		"name": "WordPress",
+		"value": 430
 	}, {
-		"country": "JavaScript",
-		"litres": 80
+		"name": "Bootstrap",
+		"value": 400
 	}, {
-		"country": "WordPress",
-		"litres": 80
+		"name": "Foundation",
+		"value": 300
 	}, {
-		"country": "Bootstrap",
-		"litres": 90
+		"name": "JavaScript",
+		"value": 300
 	}, {
-		"country": "Foundation",
-		"litres": 90
+		"name": "jQuery",
+		"value": 320
 	}, {
-		"country": "Git",
-		"litres": 95
-	}, {
-		"country": "jQuery",
-		"litres": 90
-	}, {
-		"country": "Magento",
-		"litres": 20
+		"name": "Magento",
+		"value": 100
 	}];
 	
+	var series = chart.series.push(new am4charts.PictorialStackedSeries());
+	series.dataFields.value = "value";
+	series.dataFields.category = "name";
+	series.alignLabels = true;
 	
-	// cointainer to hold both charts
-	var container = am4core.create("chartdivskill", am4core.Container);
-	container.width = am4core.percent(100);
-	container.height = am4core.percent(100);
-	container.layout = "horizontal";
+	series.maskSprite.path = iconPath;
+	series.ticks.template.locationX = 1;
+	series.ticks.template.locationY = 0.5;
 	
-	container.events.on("maxsizechanged", function () {
-		chart1.zIndex = 0;
-		separatorLine.zIndex = 1;
-		dragText.zIndex = 2;
-		chart2.zIndex = 3;
-	})
+	series.labelsContainer.width = 200;
 	
-	var chart1 = container.createChild(am4charts.PieChart);
-	chart1 .fontSize = 11;
-	chart1.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-	chart1.data = data;
-	chart1.radius = am4core.percent(70);
-	chart1.innerRadius = am4core.percent(40);
-	chart1.zIndex = 1;
-	
-	var series1 = chart1.series.push(new am4charts.PieSeries());
-	series1.dataFields.value = "litres";
-	series1.dataFields.category = "country";
-	series1.colors.step = 2;
-	series1.alignLabels = false;
-	series1.labels.template.bent = true;
-	series1.labels.template.radius = 3;
-	series1.labels.template.padding(0,0,0,0);
-	
-	var sliceTemplate1 = series1.slices.template;
-	sliceTemplate1.cornerRadius = 5;
-	sliceTemplate1.draggable = true;
-	sliceTemplate1.inert = true;
-	sliceTemplate1.propertyFields.fill = "color";
-	sliceTemplate1.propertyFields.fillOpacity = "opacity";
-	sliceTemplate1.propertyFields.stroke = "color";
-	sliceTemplate1.propertyFields.strokeDasharray = "strokeDasharray";
-	sliceTemplate1.strokeWidth = 1;
-	sliceTemplate1.strokeOpacity = 1;
-	
-	var zIndex = 5;
-	
-	sliceTemplate1.events.on("down", function (event) {
-		event.target.toFront();
-		// also put chart to front
-		var series = event.target.dataItem.component;
-		series.chart.zIndex = zIndex++;
-	})
-	
-	series1.ticks.template.disabled = true;
-	
-	sliceTemplate1.states.getKey("active").properties.shiftRadius = 0;
-	
-	sliceTemplate1.events.on("dragstop", function (event) {
-		handleDragStop(event);
-	})
-	
-	// separator line and text
-	var separatorLine = container.createChild(am4core.Line);
-	separatorLine.x1 = 0;
-	separatorLine.y2 = 300;
-	separatorLine.strokeWidth = 3;
-	separatorLine.stroke = am4core.color("#dadada");
-	separatorLine.valign = "middle";
-	separatorLine.strokeDasharray = "5,5";
-	
-	
-	var dragText = container.createChild(am4core.Label);
-	dragText.text = "Pasa el skill al otro lado para verlo mejor :) ";
-	dragText.rotation = 90;
-	dragText.valign = "middle";
-	dragText.align = "center";
-	dragText.paddingBottom = 5;
-	
-	// second chart
-	var chart2 = container.createChild(am4charts.PieChart);
-	chart2.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-	chart2 .fontSize = 11;
-	chart2.radius = am4core.percent(70);
-	chart2.data = data;
-	chart2.innerRadius = am4core.percent(40);
-	chart2.zIndex = 1;
-	
-	var series2 = chart2.series.push(new am4charts.PieSeries());
-	series2.dataFields.value = "litres";
-	series2.dataFields.category = "country";
-	series2.colors.step = 2;
-	
-	series2.alignLabels = false;
-	series2.labels.template.bent = true;
-	series2.labels.template.radius = 3;
-	series2.labels.template.padding(0,0,0,0);
-	series2.labels.template.propertyFields.disabled = "disabled";
-	
-	var sliceTemplate2 = series2.slices.template;
-	sliceTemplate2.copyFrom(sliceTemplate1);
-	
-	series2.ticks.template.disabled = true;
-	
-	function handleDragStop(event) {
-		var targetSlice = event.target;
-		var dataItem1;
-		var dataItem2;
-		var slice1;
-		var slice2;
-	
-		if (series1.slices.indexOf(targetSlice) != -1) {
-			slice1 = targetSlice;
-			slice2 = series2.dataItems.getIndex(targetSlice.dataItem.index).slice;
-		}
-		else if (series2.slices.indexOf(targetSlice) != -1) {
-			slice1 = series1.dataItems.getIndex(targetSlice.dataItem.index).slice;
-			slice2 = targetSlice;
-		}
-	
-	
-		dataItem1 = slice1.dataItem;
-		dataItem2 = slice2.dataItem;
-	
-		var series1Center = am4core.utils.spritePointToSvg({ x: 0, y: 0 }, series1.slicesContainer);
-		var series2Center = am4core.utils.spritePointToSvg({ x: 0, y: 0 }, series2.slicesContainer);
-	
-		var series1CenterConverted = am4core.utils.svgPointToSprite(series1Center, series2.slicesContainer);
-		var series2CenterConverted = am4core.utils.svgPointToSprite(series2Center, series1.slicesContainer);
-	
-		// tooltipY and tooltipY are in the middle of the slice, so we use them to avoid extra calculations
-		var targetSlicePoint = am4core.utils.spritePointToSvg({ x: targetSlice.tooltipX, y: targetSlice.tooltipY }, targetSlice);
-	
-		if (targetSlice == slice1) {
-			if (targetSlicePoint.x > container.pixelWidth / 2) {
-				var value = dataItem1.value;
-	
-				dataItem1.hide();
-	
-				var animation = slice1.animate([{ property: "x", to: series2CenterConverted.x }, { property: "y", to: series2CenterConverted.y }], 400);
-				animation.events.on("animationprogress", function (event) {
-					slice1.hideTooltip();
-				})
-	
-				slice2.x = 0;
-				slice2.y = 0;
-	
-				dataItem2.show();
-			}
-			else {
-				slice1.animate([{ property: "x", to: 0 }, { property: "y", to: 0 }], 400);
-			}
-		}
-		if (targetSlice == slice2) {
-			if (targetSlicePoint.x < container.pixelWidth / 2) {
-	
-				var value = dataItem2.value;
-	
-				dataItem2.hide();
-	
-				var animation = slice2.animate([{ property: "x", to: series1CenterConverted.x }, { property: "y", to: series1CenterConverted.y }], 400);
-				animation.events.on("animationprogress", function (event) {
-					slice2.hideTooltip();
-				})
-	
-				slice1.x = 0;
-				slice1.y = 0;
-				dataItem1.show();
-			}
-			else {
-				slice2.animate([{ property: "x", to: 0 }, { property: "y", to: 0 }], 400);
-			}
-		}
-	
-		toggleDummySlice(series1);
-		toggleDummySlice(series2);
-	
-		series1.hideTooltip();
-		series2.hideTooltip();
-	}
-	
-	function toggleDummySlice(series) {
-		var show = true;
-		for (var i = 1; i < series.dataItems.length; i++) {
-			var dataItem = series.dataItems.getIndex(i);
-			if (dataItem.slice.visible && !dataItem.slice.isHiding) {
-				show = false;
-			}
-		}
-	
-		var dummySlice = series.dataItems.getIndex(0);
-		if (show) {
-			dummySlice.show();
-		}
-		else {
-			dummySlice.hide();
-		}
-	}
-	
-	series2.events.on("datavalidated", function () {
-	
-		var dummyDataItem = series2.dataItems.getIndex(0);
-		dummyDataItem.show(0);
-		dummyDataItem.slice.draggable = false;
-		dummyDataItem.slice.tooltipText = undefined;
-	
-		for (var i = 1; i < series2.dataItems.length; i++) {
-			series2.dataItems.getIndex(i).hide(0);
-		}
-	})
-	
-	series1.events.on("datavalidated", function () {
-		var dummyDataItem = series1.dataItems.getIndex(0);
-		dummyDataItem.hide(0);
-		dummyDataItem.slice.draggable = false;
-		dummyDataItem.slice.tooltipText = undefined;
-	})
+	chart.legend = new am4charts.Legend();
+	chart.legend.position = "left";
+	chart.legend.valign = "bottom";
 	
 	}); // end am4core.ready()
