@@ -1,0 +1,52 @@
+.skills 
+    font-family:  'Inconsolata', monospace
+    width: 45%
+    margin: 2% 0 5% 4%
+    float: left
+
+    *,
+    *::after,
+    *::before 
+        box-sizing: border-box
+
+    .skill 
+        width: 90%
+        .type 
+            color: #fff
+            font-weight: 300
+            font-size: 0.85rem
+            letter-spacing: 0.145em
+            text-transform: uppercase
+            width: 5em
+
+
+        .outer-bar,
+        .inner-bar 
+            height: 0.75em
+            
+        .outer-bar 
+            background: #333
+
+        .inner-bar 
+            animation: fillBar 1s forwards
+            background: $berry
+            left: 5em
+            transform: scaleX(0)
+            transform-origin: 0 0
+
+            &.inner-100 
+                width: 100%
+            &.inner-95 
+                width: 95%
+            &.inner-90 
+                width: 90%
+            &.inner-75 
+                width: 75%
+
+@keyframes fillBar 
+    to 
+        transform: scaleX(1)
+
+.others
+    width: 50%
+    float: left

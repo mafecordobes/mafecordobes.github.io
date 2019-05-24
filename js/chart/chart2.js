@@ -1,56 +1,77 @@
 am4core.ready(function() {
 
 	// Themes begin
-	am4core.useTheme(am4themes_dark);
 	am4core.useTheme(am4themes_animated);
 	// Themes end
 	
-	var iconPath = "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+	var chart = am4core.create("chartdivskill", am4plugins_wordCloud.WordCloud);
+	chart.fontFamily = "Inconsolata";
+	var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+	series.randomness = 0.1;
+	series.rotationThreshold = 0.5;
 	
-	
-	
-	var chart = am4core.create("chartdivskill", am4charts.SlicedChart);
-	chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-	
-	chart.data = [{
-		"name": "HTLM5",
-		"value": 500
+	series.data = [ {
+		"tag": "PHP",
+		"count": "100"
 	}, {
-		"name": "CSS3/SASS/SCSS/LESS",
-		"value": 450
+		"tag": "jQuery",
+		"count": "90"
 	}, {
-		"name": "WordPress",
-		"value": 430
+		"tag": "UX/UI Design",
+		"count": "89"
 	}, {
-		"name": "Bootstrap",
-		"value": 400
+		"tag": "e commerce",
+		"count": "88"
 	}, {
-		"name": "Foundation",
-		"value": 300
+		"tag": "React",
+		"count": "89"
 	}, {
-		"name": "JavaScript",
-		"value": 300
+		"tag": "node.js",
+		"count": "85"
 	}, {
-		"name": "jQuery",
-		"value": 320
+		"tag": "Git flow",
+		"count": "87"
 	}, {
-		"name": "Magento",
-		"value": 100
-	}];
+		"tag": "Magento",
+		"count": "84"
+	}, {
+		"tag": "MySQL",
+		"count": "84"
+	}, {
+		"tag": "Animations",
+		"count": "84"
+	}, {
+		"tag": "Cake",
+		"count": "70"
+	}, {
+		"tag": "Scrum",
+		"count": "84"
+	}, {
+		"tag": "BitBucket",
+		"count": "80"
+	}, {
+		"tag": "Agile",
+		"count": "70"
+	} ];
 	
-	var series = chart.series.push(new am4charts.PictorialStackedSeries());
-	series.dataFields.value = "value";
-	series.dataFields.category = "name";
-	series.alignLabels = true;
+	series.dataFields.word = "tag";
+	series.dataFields.value = "count";
 	
-	series.maskSprite.path = iconPath;
-	series.ticks.template.locationX = 1;
-	series.ticks.template.locationY = 0.5;
+	series.heatRules.push({
+	 "target": series.labels.template,
+	 "property": "fill",
+	 "min": am4core.color("#0000CC"),
+	 "max": am4core.color("#CC00CC"),
+	 "dataField": "value"
+	});
 	
-	series.labelsContainer.width = 200;
 	
-	chart.legend = new am4charts.Legend();
-	chart.legend.position = "left";
-	chart.legend.valign = "bottom";
+	var hoverState = series.labels.template.states.create("hover");
+	hoverState.properties.fill = am4core.color("#FFFFFF");
+	
+	var title = chart.titles.create();
+	title.text = "Otros Conocimientos";
+	title.fontSize = 20;
+	title.fontWeight = "14";
 	
 	}); // end am4core.ready()
