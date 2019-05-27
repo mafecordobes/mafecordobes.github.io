@@ -50,7 +50,7 @@ body
 		overflow: hidden
 
 	.panel 
-		&.main , &.turqoise, &.green, &.bordeaux
+		&.main , &.turqoise, &.green, &.bordeaux, &.grey
 			background-color: $smoky
 
 		&.turqoise 
@@ -64,6 +64,15 @@ body
 		&.bordeaux 
 			.title-sect, .title-sect-close
 				color: $white
+		
+		&.grey 
+			font-family: 'Montserrat', sans-serif
+			.title-sect, .title-sect-close
+				color: $light_gray
+			p 
+				padding-left: 2%
+				font-weight: 700
+				color: $berry
 
 	.main-content
 		position: relative
@@ -149,3 +158,31 @@ body
 	.section-two
 		display: inline-block
 		width: 100%
+
+	.projects
+		list-style: none
+		display: flex
+		li
+			border-radius: 50%
+			width: 145px
+			height: 145px
+			margin-right: 5%
+			position: relative
+			border: 1px solid $light_gray
+
+			&:hover
+				background: $white
+				img 
+					filter: none
+
+			img
+				width: 100px
+				position: absolute
+				top: 50%
+				left: 50%
+				transform: translate(-50%,-50%)
+				filter: grayscale(100%)
+		&.tera, &.logos
+			img 
+				width: 130px
+			
