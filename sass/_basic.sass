@@ -63,16 +63,17 @@ body
 
 		&.bordeaux 
 			.title-sect, .title-sect-close
-				color: $white
+				color: $light_gray
 		
 		&.grey 
-			font-family: 'Montserrat', sans-serif
+			font-family: 'Inconsolata', sans-serif
 			.title-sect, .title-sect-close
-				color: $light_gray
+				color: $white
 			p 
 				padding-left: 2%
+				display: inline-block
+				width: 100%
 				font-weight: 700
-				color: $berry
 
 	.main-content
 		position: relative
@@ -161,13 +162,16 @@ body
 
 	.projects
 		list-style: none
-		display: flex
+		display: inline-block
+		width: 100%
 		li
 			border-radius: 50%
 			width: 145px
 			height: 145px
-			margin-right: 5%
+			margin-right: 3%
+			margin-bottom: 3%
 			position: relative
+			float: left
 			border: 1px solid $light_gray
 
 			&:hover
